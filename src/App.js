@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import {
   FaLinkedin, FaEnvelope, FaPhone,
   FaCheckCircle, FaBug, FaClipboardCheck, FaSearch,
-  FaWordpress, FaFlask, FaBolt
+  FaWordpress, FaFlask, FaBolt, FaDownload, FaExternalLinkAlt
 } from 'react-icons/fa';
 import { SiPostman, SiJira } from 'react-icons/si';
 import {
@@ -10,7 +10,8 @@ import {
   HiOutlineArrowNarrowRight, HiOutlineArrowNarrowDown,
   HiOutlineUserGroup, HiOutlineClock,
   HiOutlineLightBulb, HiOutlineChat,
-  HiOutlineMenuAlt4, HiOutlineX
+  HiOutlineMenuAlt4, HiOutlineX,
+  HiOutlineDesktopComputer, HiOutlineDeviceMobile, HiOutlineGlobe
 } from 'react-icons/hi';
 
 /* -------------------- DATA -------------------- */
@@ -19,6 +20,7 @@ const NAV = [
   { id: 'home', label: 'Home' },
   { id: 'about', label: 'About' },
   { id: 'experience', label: 'Experience' },
+  { id: 'projects', label: 'Projects' },
   { id: 'skills', label: 'Skills' },
   { id: 'education', label: 'Education' },
   { id: 'contact', label: 'Contact' },
@@ -27,7 +29,7 @@ const NAV = [
 const STATS = [
   { value: '1+', label: 'Years Experience', color: '#A855F7' },
   { value: '7+', label: 'Testing Types', color: '#22D3EE' },
-  { value: '8+', label: 'Tools Mastered', color: '#F472B6' },
+  { value: '5+', label: 'Projects Tested', color: '#F472B6' },
   { value: '100%', label: 'Commitment', color: '#A3E635' },
 ];
 
@@ -59,6 +61,64 @@ const EXPERIENCE = [
       'Delivered structured lessons and assessments — building planning, documentation, and communication habits.',
       'Monitored progress and gave detail-focused feedback, reinforcing an analytical QA mindset.',
     ],
+  },
+];
+
+const PROJECTS = [
+  {
+    title: 'CoSignage Player',
+    subtitle: 'Digital Signage Platform',
+    url: 'https://player.cosignage.com',
+    type: 'Web',
+    icon: HiOutlineDesktopComputer,
+    color: '#A855F7',
+    description:
+      'Performed functional and UI testing on the digital signage player sign-in and content-playback flows across browsers.',
+    tags: ['Functional Testing', 'UI Testing', 'Cross-Browser'],
+  },
+  {
+    title: 'Yomie Stream Console',
+    subtitle: 'Streaming Management Console',
+    url: 'https://streams.yomie.be',
+    type: 'Web',
+    icon: HiOutlineGlobe,
+    color: '#22D3EE',
+    description:
+      'Tested the streaming management console covering login, stream configuration, and console functionality.',
+    tags: ['Login Flows', 'Stream Config', 'Console Testing'],
+  },
+  {
+    title: 'Yomie Web Player',
+    subtitle: 'Web-Based Media Player',
+    url: 'https://webplayer.yomie.be',
+    type: 'Web',
+    icon: HiOutlineDesktopComputer,
+    color: '#F472B6',
+    description:
+      'Conducted UI and playback testing on the web-based media player across devices and browsers.',
+    tags: ['UI Testing', 'Playback Testing', 'Responsive'],
+  },
+  {
+    title: 'LexiGoGo',
+    subtitle: 'Mobile Application',
+    url: 'https://lexigogo.com',
+    type: 'Mobile',
+    icon: HiOutlineDeviceMobile,
+    color: '#A3E635',
+    description:
+      'Performed mobile app testing across core user flows, ensuring functional accuracy and consistent UI behavior.',
+    tags: ['Mobile Testing', 'UI Behavior', 'User Flows'],
+  },
+  {
+    title: 'Dimunet WP License',
+    subtitle: 'WordPress Licensing Platform',
+    url: 'https://wplicense.dimunet.com',
+    type: 'Web',
+    icon: HiOutlineGlobe,
+    color: '#A855F7',
+    description:
+      'Tested the WordPress licensing platform, validating license activation, management flows, and platform stability.',
+    tags: ['WordPress', 'License Flow', 'Stability'],
   },
 ];
 
@@ -111,6 +171,8 @@ const CONTACT = {
   emailHref: 'mailto:zainabimran505@gmail.com',
   location: 'Rawalpindi, Pakistan',
   linkedin: 'https://linkedin.com',
+  cvPath: '/Zainab_Imran_CV.pdf',
+  cvFileName: 'Zainab_Imran_CV.pdf',
 };
 
 /* -------------------- HOOKS -------------------- */
@@ -244,12 +306,21 @@ const Navbar = ({ active, scrolled }) => {
               ))}
             </nav>
 
-            <a
-              href={CONTACT.emailHref}
-              className="hidden lg:inline-flex items-center gap-2 px-5 py-2 rounded-full text-[11px] font-semibold tracking-wider uppercase text-[#08070B] bg-gradient-to-r from-[#A855F7] to-[#22D3EE] hover:shadow-[0_0_20px_#A855F7aa] transition-all duration-500"
-            >
-              <FaBolt size={9} /> Hire Me
-            </a>
+            <div className="hidden lg:flex items-center gap-2">
+              <a
+                href={CONTACT.cvPath}
+                download={CONTACT.cvFileName}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[11px] font-semibold tracking-wider uppercase text-[#A3E635] border border-[#A3E635]/40 hover:bg-[#A3E635]/10 hover:border-[#A3E635] hover:shadow-[0_0_20px_rgba(163,230,53,0.3)] transition-all duration-500"
+              >
+                <FaDownload size={10} /> CV
+              </a>
+              <a
+                href={CONTACT.emailHref}
+                className="inline-flex items-center gap-2 px-5 py-2 rounded-full text-[11px] font-semibold tracking-wider uppercase text-[#08070B] bg-gradient-to-r from-[#A855F7] to-[#22D3EE] hover:shadow-[0_0_20px_#A855F7aa] transition-all duration-500"
+              >
+                <FaBolt size={9} /> Hire Me
+              </a>
+            </div>
 
             <button
               onClick={() => setOpen(!open)}
@@ -269,12 +340,12 @@ const Navbar = ({ active, scrolled }) => {
         }`}
       >
         <div className="absolute inset-0 bg-[#08070B]/98 backdrop-blur-2xl" />
-        <nav className="relative h-full flex flex-col justify-center px-8 gap-2">
+        <nav className="relative h-full flex flex-col justify-center px-8 gap-1">
           {NAV.map(({ id, label }, i) => (
             <button
               key={id}
               onClick={() => go(id)}
-              className={`text-left py-3 transition-all duration-500 ${
+              className={`text-left py-2 transition-all duration-500 ${
                 open ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-4'
               }`}
               style={{ transitionDelay: `${i * 50 + 100}ms` }}
@@ -283,7 +354,7 @@ const Navbar = ({ active, scrolled }) => {
                 0{i + 1}
               </span>
               <span
-                className={`font-serif text-4xl transition-colors ${
+                className={`font-serif text-3xl transition-colors ${
                   active === id ? 'text-[#A855F7]' : 'text-white'
                 }`}
               >
@@ -291,6 +362,15 @@ const Navbar = ({ active, scrolled }) => {
               </span>
             </button>
           ))}
+
+          {/* Mobile CV button */}
+          <a
+            href={CONTACT.cvPath}
+            download={CONTACT.cvFileName}
+            className="mt-6 inline-flex items-center gap-3 px-6 py-3 rounded-xl border border-[#A3E635]/50 text-[#A3E635] text-sm font-semibold tracking-wide w-fit hover:bg-[#A3E635]/10 transition-all duration-500"
+          >
+            <FaDownload size={14} /> Download CV
+          </a>
         </nav>
       </div>
     </>
@@ -335,7 +415,6 @@ const Portfolio = () => {
         <div className="absolute top-[-10%] left-[-5%] w-[500px] h-[500px] bg-[#A855F7]/[0.15] rounded-full blur-[120px]" />
         <div className="absolute top-[30%] right-[-10%] w-[500px] h-[500px] bg-[#22D3EE]/[0.12] rounded-full blur-[120px]" />
         <div className="absolute bottom-[-10%] left-[30%] w-[600px] h-[600px] bg-[#F472B6]/[0.08] rounded-full blur-[120px]" />
-        {/* Grid */}
         <div
           className="absolute inset-0 opacity-[0.06]"
           style={{
@@ -353,7 +432,6 @@ const Portfolio = () => {
       <section id="home" className="relative min-h-screen flex items-center pt-20">
         <div className="max-w-[1500px] mx-auto px-6 sm:px-10 lg:px-16 w-full py-16">
           <div className="grid lg:grid-cols-12 gap-12 items-center">
-            {/* Left content */}
             <div className="lg:col-span-7">
               <Reveal>
                 <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full bg-[#A3E635]/10 border border-[#A3E635]/30 mb-8">
@@ -402,6 +480,16 @@ const Portfolio = () => {
                     View My Work
                     <HiOutlineArrowNarrowRight className="group-hover:translate-x-1 transition-transform" />
                   </button>
+
+                  <a
+                    href={CONTACT.cvPath}
+                    download={CONTACT.cvFileName}
+                    className="group inline-flex items-center gap-3 px-7 py-3.5 rounded-xl border border-[#A3E635]/50 text-[#A3E635] text-sm font-semibold tracking-wide hover:bg-[#A3E635]/10 hover:border-[#A3E635] hover:shadow-[0_0_25px_rgba(163,230,53,0.4)] transition-all duration-500"
+                  >
+                    <FaDownload className="group-hover:translate-y-0.5 transition-transform" />
+                    Download CV
+                  </a>
+
                   <button
                     onClick={() => go('contact')}
                     className="px-7 py-3.5 rounded-xl border border-[#22D3EE]/40 text-[#22D3EE] text-sm font-semibold tracking-wide hover:bg-[#22D3EE]/10 hover:border-[#22D3EE] transition-all duration-500"
@@ -429,7 +517,6 @@ const Portfolio = () => {
               </Reveal>
             </div>
 
-            {/* Right: stats panel */}
             <div className="lg:col-span-5">
               <Reveal delay={300}>
                 <div className="relative">
@@ -582,7 +669,6 @@ const Portfolio = () => {
                   className="relative grid lg:grid-cols-12 gap-6 p-6 sm:p-8 rounded-3xl bg-white/[0.02] border border-white/[0.08] hover:border-white/[0.15] transition-all duration-500 overflow-hidden group"
                   style={{ boxShadow: `inset 0 0 60px ${exp.color}06` }}
                 >
-                  {/* Left accent */}
                   <div
                     className="absolute top-0 left-0 w-1 h-full opacity-40 group-hover:opacity-100 transition-opacity duration-500"
                     style={{
@@ -591,7 +677,6 @@ const Portfolio = () => {
                     }}
                   />
 
-                  {/* Meta */}
                   <div className="lg:col-span-4 flex lg:flex-col gap-4 lg:gap-2">
                     <div className="flex items-center gap-2">
                       {exp.current && (
@@ -646,13 +731,108 @@ const Portfolio = () => {
         </div>
       </section>
 
-      {/* ================= SKILLS ================= */}
-      <section id="skills" className="relative py-24 sm:py-32">
+      {/* ================= PROJECTS ================= */}
+      <section id="projects" className="relative py-24 sm:py-32 border-t border-white/[0.05]">
         <div className="max-w-[1500px] mx-auto px-6 sm:px-10 lg:px-16">
           <Reveal>
             <div className="flex items-center gap-4 mb-6">
               <span className="text-[11px] tracking-[0.4em] uppercase text-[#F472B6] font-medium">
-                03 — Skills
+                03 — Projects
+              </span>
+              <span className="flex-1 h-px bg-gradient-to-r from-[#F472B6]/40 to-transparent" />
+            </div>
+          </Reveal>
+
+          <Reveal delay={100}>
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-tight tracking-tight mb-14 max-w-4xl">
+              Where I've{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#F472B6] via-[#A855F7] to-[#22D3EE]">
+                tested & shipped.
+              </span>
+            </h2>
+          </Reveal>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {PROJECTS.map((p, i) => {
+              const Icon = p.icon;
+              return (
+                <Reveal key={p.title} delay={i * 100}>
+                  <a
+                    href={p.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative block p-6 rounded-3xl bg-white/[0.02] border border-white/[0.08] hover:border-white/[0.2] transition-all duration-500 hover:-translate-y-1.5 h-full overflow-hidden"
+                    style={{ boxShadow: `inset 0 0 60px ${p.color}06` }}
+                  >
+                    {/* Accent top line */}
+                    <div
+                      className="absolute top-0 left-6 right-6 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                      style={{
+                        background: `linear-gradient(90deg, transparent, ${p.color}, transparent)`,
+                        boxShadow: `0 0 12px ${p.color}`,
+                      }}
+                    />
+
+                    {/* Type badge + external link */}
+                    <div className="flex items-center justify-between mb-6">
+                      <span
+                        className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[10px] tracking-[0.2em] uppercase font-semibold"
+                        style={{
+                          background: `${p.color}15`,
+                          border: `1px solid ${p.color}40`,
+                          color: p.color,
+                        }}
+                      >
+                        <Icon size={11} />
+                        {p.type}
+                      </span>
+                      <FaExternalLinkAlt
+                        size={12}
+                        className="text-white/30 group-hover:text-white transition-colors duration-500"
+                      />
+                    </div>
+
+                    {/* Icon + Title */}
+                    <div className="mb-4">
+                      <h3 className="text-xl font-bold text-white leading-tight mb-1 group-hover:text-[#A855F7] transition-colors duration-500">
+                        {p.title}
+                      </h3>
+                      <p className="text-xs tracking-[0.15em] uppercase text-white/40">
+                        {p.subtitle}
+                      </p>
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-sm text-white/60 leading-relaxed mb-6">
+                      {p.description}
+                    </p>
+
+                    {/* Tags */}
+                    <div className="flex flex-wrap gap-2">
+                      {p.tags.map((t) => (
+                        <span
+                          key={t}
+                          className="text-[10px] tracking-wider uppercase px-2 py-1 rounded bg-white/[0.04] border border-white/[0.08] text-white/50"
+                        >
+                          {t}
+                        </span>
+                      ))}
+                    </div>
+                  </a>
+                </Reveal>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ================= SKILLS ================= */}
+      <section id="skills" className="relative py-24 sm:py-32 border-t border-white/[0.05]">
+        <div className="max-w-[1500px] mx-auto px-6 sm:px-10 lg:px-16">
+          <Reveal>
+            <div className="flex items-center gap-4 mb-6">
+              <span className="text-[11px] tracking-[0.4em] uppercase text-[#F472B6] font-medium">
+                04 — Skills
               </span>
               <span className="flex-1 h-px bg-gradient-to-r from-[#F472B6]/40 to-transparent" />
             </div>
@@ -667,7 +847,6 @@ const Portfolio = () => {
             </h2>
           </Reveal>
 
-          {/* Testing Proficiency */}
           <Reveal>
             <div className="text-[11px] tracking-[0.3em] uppercase text-white/40 mb-6">
               Testing Proficiency
@@ -692,7 +871,6 @@ const Portfolio = () => {
             ))}
           </div>
 
-          {/* Tools */}
           <Reveal>
             <div className="text-[11px] tracking-[0.3em] uppercase text-white/40 mb-6">
               Tools & Methods
@@ -701,10 +879,7 @@ const Portfolio = () => {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mb-16">
             {TOOLS.map(({ name, icon: Icon, color }, i) => (
               <Reveal key={name} delay={i * 40}>
-                <div
-                  className="group relative p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-white/[0.2] transition-all duration-500 hover:-translate-y-1 cursor-default"
-                  style={{ '--glow': color }}
-                >
+                <div className="group relative p-5 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-white/[0.2] transition-all duration-500 hover:-translate-y-1 cursor-default">
                   <div className="flex items-center gap-3">
                     <Icon
                       size={22}
@@ -720,7 +895,6 @@ const Portfolio = () => {
             ))}
           </div>
 
-          {/* Soft Skills */}
           <Reveal>
             <div className="text-[11px] tracking-[0.3em] uppercase text-white/40 mb-6">
               Professional Strengths
@@ -757,7 +931,7 @@ const Portfolio = () => {
           <Reveal>
             <div className="flex items-center gap-4 mb-6">
               <span className="text-[11px] tracking-[0.4em] uppercase text-[#A3E635] font-medium">
-                04 — Education
+                05 — Education
               </span>
               <span className="flex-1 h-px bg-gradient-to-r from-[#A3E635]/40 to-transparent" />
             </div>
@@ -792,7 +966,6 @@ const Portfolio = () => {
             ))}
           </div>
 
-          {/* Key Strengths */}
           <Reveal>
             <div className="text-[11px] tracking-[0.3em] uppercase text-white/40 mb-6">
               Key Strengths
@@ -822,7 +995,7 @@ const Portfolio = () => {
           <Reveal>
             <div className="flex items-center gap-4 mb-6">
               <span className="text-[11px] tracking-[0.4em] uppercase text-[#22D3EE] font-medium">
-                05 — Contact
+                06 — Contact
               </span>
               <span className="flex-1 h-px bg-gradient-to-r from-[#22D3EE]/40 to-transparent" />
             </div>
@@ -918,14 +1091,24 @@ const Portfolio = () => {
                   <p className="text-sm text-white/60 leading-relaxed mb-8">
                     Let's talk about how I can safeguard your next release.
                   </p>
-                  <a
-                    href={CONTACT.emailHref}
-                    className="group inline-flex items-center gap-3 px-6 py-3.5 rounded-xl bg-white text-[#08070B] font-bold text-sm tracking-wide hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] transition-all duration-500"
-                  >
-                    <HiOutlineMail size={16} />
-                    Send an Email
-                    <HiOutlineArrowNarrowRight className="group-hover:translate-x-1 transition-transform" />
-                  </a>
+                  <div className="flex flex-wrap gap-3">
+                    <a
+                      href={CONTACT.emailHref}
+                      className="group inline-flex items-center gap-3 px-6 py-3.5 rounded-xl bg-white text-[#08070B] font-bold text-sm tracking-wide hover:shadow-[0_0_30px_rgba(255,255,255,0.4)] transition-all duration-500"
+                    >
+                      <HiOutlineMail size={16} />
+                      Send an Email
+                      <HiOutlineArrowNarrowRight className="group-hover:translate-x-1 transition-transform" />
+                    </a>
+                    <a
+                      href={CONTACT.cvPath}
+                      download={CONTACT.cvFileName}
+                      className="group inline-flex items-center gap-3 px-6 py-3.5 rounded-xl border border-[#A3E635]/50 text-[#A3E635] font-bold text-sm tracking-wide hover:bg-[#A3E635]/10 hover:border-[#A3E635] transition-all duration-500"
+                    >
+                      <FaDownload size={14} />
+                      Download CV
+                    </a>
+                  </div>
                 </div>
               </Reveal>
             </div>
@@ -962,7 +1145,6 @@ const Portfolio = () => {
                   rel="noopener noreferrer"
                   aria-label={label}
                   className="w-9 h-9 flex items-center justify-center rounded-full border border-white/[0.1] text-white/50 hover:text-white transition-all duration-500"
-                  style={{ '--hover-color': color }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.borderColor = `${color}80`;
                     e.currentTarget.style.boxShadow = `0 0 15px ${color}60`;
