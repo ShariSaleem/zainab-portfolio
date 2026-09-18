@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import {
   FaLinkedin, FaEnvelope, FaPhone,
   FaCheckCircle, FaBug, FaClipboardCheck, FaSearch,
-  FaWordpress, FaFlask, FaArrowRight, FaBolt
+  FaWordpress, FaFlask, FaBolt
 } from 'react-icons/fa';
 import { SiPostman, SiJira } from 'react-icons/si';
 import {
@@ -91,7 +91,7 @@ const SOFT_SKILLS = [
 ];
 
 const EDUCATION = [
-  { degree: 'B.A. — Information Technology', institution: 'University of Punjab', location: 'Punjab, PK', period: '2021 — 2024' },
+  { degree: 'B.S. — Information Technology', institution: 'University of Punjab', location: 'Punjab, PK', period: '2021 — 2024' },
   { degree: 'ICS — Computer Science', institution: 'Board of Intermediate & Secondary Education', location: 'Pakistan', period: '2019 — 2021' },
 ];
 
